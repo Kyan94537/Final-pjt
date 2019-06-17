@@ -1,0 +1,347 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+$top_bgc:rgb(62, 110, 127);
+$top_color: #ffffff;
+$color1: rgb(184, 238, 135);
+$color2: rgb(224, 193, 251);
+$color3: rgb(184, 222, 185);
+$color4: rgb(184, 189, 252);
+$color5: rgb(203, 244, 203);
+$trn:  #ffb366; //車體顏色
+$top_trn: #ffd699; //車頂顏色
+$drbg: #fffff5; //車門顏色
+$trnb: #000000; //車底顏色
+$trnc: #e6ffff; //車門窗顏色
+$popu: #b6ffb4; //泡泡顏色
+
+@import url('https://fonts.googleapis.com/css?family=ZCOOL+KuaiLe&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Ranga&display=swap');
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  //border: solid 1px red;
+}
+
+body {
+  width: 100%;
+  position: relative;
+  background-color: #fcf6ba;
+  box-sizing: border-box;
+  border-top: solid 30px #116584;
+  border-bottom: solid 30px #116584;
+  overflow: hidden;
+}
+.Top {
+  position: absolute;
+  height: 300px;
+  width: 300px;
+  background-color: $top_bgc;
+  color: $top_color;
+  border-radius: 30px 30px 225px 30px;
+  margin-top: -100px;
+  margin-left: -75px;
+  font-family: 'ZCOOL KuaiLe', cursive;
+  h3 {
+    margin-left: 100px;
+    margin-top: 100px;
+    font-size: 25px;
+    width: 100px;
+    line-height: 60px;
+    span{
+      background-color: red;
+      font-size: 50px;
+    }
+  }
+}
+.Top:hover{
+  transform: translate(30px,30px);
+  box-shadow: -20px -25px 15px -15px rgba(0,0,0,0.5);
+}
+
+.screen {
+  width: 100%;
+  height: 100%;
+  left: 100%;
+}
+.namecard {
+  position: fixed;
+  width: 300px;
+  height: 200px;
+  left: 50%;
+  top: 10% ;
+  padding: 0px 20px 30px 20px;
+  overflow: hidden;
+  background-color: #3e6e7f;
+  color: #fff;
+  border: solid 1px rgba(0, 0, 0, 0.15);
+  box-shadow: 20px 25px 105px -15px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  font-family: 'Ranga', cursive;
+  transition: 0.5s;
+  animation: ease-in 2s infinite;
+  hr {
+    border-color: #fff;
+    margin-top: 5px;
+    margin-bottom: 20px;
+  }
+  h2 {
+    font-size: 25px;
+  }
+  span {
+    font-size: 18px;
+  }
+  h5 {
+    font-size: 16px;
+    font-weight: 400;
+  }
+}
+
+.namecard:hover{
+  transform: translate(-50px,-50px);
+  box-shadow: -20px -25px 15px -15px rgba(0,0,0,0.5);
+}
+
+.allbub {
+  width: 100%;
+  height: 100%;
+  border-radius: 0px;
+  z-index: -3;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #333;
+  @keyframes falling {
+    0%,100% {
+      opacity: 0;
+    }
+    70% {
+      opacity: 1;
+    }
+    0% {
+      transform: tanslate(100%, 0px);
+    }
+    100% {
+      
+      transform: scale(3) translate(0px, 100%) ;
+      background: $popu ;
+      box-shadow: inset 1px 4px 1px 0 lighten($popu, 10);
+       
+      
+    }
+  }
+  [class*='bub'] {
+    background-color: #fff;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    animation: falling 3s infinite;
+  }
+  @for $i from 1 through 30{
+    .bub#{$i} {
+      $posX: random()*100%;
+      $posY: random()*-100%+90%;
+      position: absolute;
+      left: $posX;
+      top: $posY;
+      animation-delay: $i*-0.3s;
+    }
+  }
+}
+
+@keyframes back {
+  0%{
+    background-color: $color1;
+  }
+  25%{
+    background-color: $color2;
+  }
+  50%{
+    background-color: $color3;
+  }
+  75%{
+    background-color: $color4;
+  }
+  100%{
+    background-color: $color5;
+  }
+}
+.allbub {
+  animation: back 8s infinite;
+}
+.train { //火車本體
+  background: $trn;
+  width: 900px;
+  height: 150px;
+  bottom: 185px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: inset 0 4px 0 0 darken($trn, 10), -1px 0 0 0 $trn;
+  border-radius: 1000px 1000px 0 0;
+  animation: train 10s infinite linear;
+  animation-direction:alternate;
+   &:before { //車頂
+    content: '';
+    position: absolute;
+    margin: auto;
+    width: 775px;
+    height: 35px;
+    top: -2px;
+    left: 65px;
+    background: $top_trn;
+    border-radius: 15% 15% 0 0 / 100% 100% 0 0;
+    box-shadow: inset 0 4px 0 0 lighten($top_trn, 10);
+  }
+  &:after { //車門
+    content:'';
+    position: absolute;
+    margin: auto;
+    width: 60px;
+    height: 80px;
+    bottom: 0;
+    left: 418px;
+    background: $drbg;
+    border-radius: 5px 5px 0 0;
+    box-shadow: -2px -2px 0 0 darken($trn, 12), 1px 0 0 0 lighten($trn, 20), inset 0 -5px 0 0 $trnb;
+}
+  & h5{ //跑馬燈
+  color: #ccffcc;
+  font-size: 20px;
+  top: 25px;
+	height: 25px;
+	background: black;
+	width: 75%;
+	margin: 20px auto;
+	position: relative;
+	overflow: hidden;
+  border-radius:25% 25% 0 0 ;
+  animation: changing 12s infinite;
+  }
+  @keyframes changing {
+    0%{
+    color:  #FAFAD2;
+  }
+  40%{
+    color: #FFA500;
+  }
+  60%{
+    color: #FAFAD2;
+  }
+  100%{
+    color: #E0FFFF;
+    }
+  }
+  
+  h5 *{ //跑馬燈字動畫
+    white-space: nowrap;
+	position: absolute;
+	animation: marquee 5s linear 0s infinite;
+  }
+ & ul { //車身條紋
+    width: 900px;
+    height: 60px;
+    box-shadow: 0 10px 0 0 lighten($drbg, 2);
+    padding-top: 20px;
+  
+  &:before {//車門窗
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 30px;
+      background: $trnc;
+      left: 428px;
+      top: 80px;
+      z-index: 2;
+      border-radius: 5px;
+      box-shadow: 0 0 0 1px darken($trn, 10);
+    }
+   &:after { //車底
+      content: '';
+      position: absolute;
+      margin: auto;
+      bottom: -15px;
+      left: 5px; 
+      width: 890px;
+      height: 15px;
+      background: $trnb;
+      border-radius: 0 0 10px 10px;
+    }
+  }
+  & li {//車窗
+      width: 300px;
+      height: 30px;
+      display: inline-block;
+      background: $trnc;
+      margin-left: 95px;
+      border-radius: 20px 20px 0 0 ;
+      border: 1px solid $trnc;
+      position: relative;
+      overflow: hidden;
+      
+      &:before { //車窗框
+        content: '';
+        position: absolute;
+        margin: auto;
+        top: 20px;
+        bottom: 0;
+        left: 0;
+        background: $drbg;
+        width: 100%;
+        height: 4px;
+        box-shadow: 0 2px 0 0 darken($trn, 10);
+      }
+    }
+}
+
+@keyframes namecard {
+  0% {
+    margin-top: -200px;
+    margin-left: -300px;
+  }
+  50% {
+    margin-top: -75px;
+    margin-ledt: -50px;
+  }
+  100% {
+    margin-top: -100px;
+    margin-ledt: -75px;
+  }
+}
+@keyframes title {
+  0% {
+    margin-top: -200px;
+    margin-left: -300px;
+  }
+  50% {
+    margin-top: -75px;
+    margin-ledt: -50px;
+  }
+  100% {
+    margin-top: -100px;
+    margin-ledt: -75px;
+  }
+}
+
+.Top {
+  animation-name: title;
+  animation-duration: 1.5s;
+}
+@keyframes marquee {
+	0% {
+		left: 100%;
+		transform: translateX(0%);
+	}
+	100% {
+		left: 0%;
+		transform: translateX(-100%);
+	}
+}
+@keyframes train
+{
+0% {left:100%;}
+100% {left:-100%;}
+}
